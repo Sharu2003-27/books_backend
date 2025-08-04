@@ -12,32 +12,6 @@ app.use(express.json())
 app.use(cors());
 intializeDatabase()
 
-const jsonData = fs.readFileSync("./books.json", "utf-8")
-const booksData = JSON.parse(jsonData)
-
-function seedData() {
-    try { 
-        for(const book of booksData){
-          const newBookDetails = new Book ({
-            title: book.title,
-            author: book.author,
-            publishedYear: book.publishedYear,
-            genre: book.genre,
-            language: book.language,
-            country: book.country,
-            rating: book.rating,
-            summary: book.summary,
-            coverImageUrl: book.coverImageUrl
-          }) 
-          newBookDetails.save()
-        }
-    } catch (error) {
-        console.log("Error seeding the data.",error)
-    }
-}
-
-// seedData()
-
 app.get("/", (req, res) => {
     res.send("Hello, Welcome to Books Management.")
 })
